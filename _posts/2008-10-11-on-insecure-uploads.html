@@ -1,0 +1,48 @@
+--- 
+mt_id: 11
+layout: post
+title: On Insecure uploads
+date: 2008-10-11 15:31:54 -04:00
+---
+It is a common requirement these days for web applications to allow and provide users with a file upload interface.
+<br/>
+You may want to allow your users upload and share images or documents.
+Handling user provided files is dangerous and the files should be treated with utmost care.
+<br/>
+<br/>
+<b>How was my website hacked/defaced ?</b>
+<br/>
+<br/>
+The intruder using the poorly secured interface uploads a file, the file is saved in a predictable location, accessible through the web and, most important, the file name stays unmodified. 
+<br/>
+<br/>
+If these conditions are met, the attacker can upload a prepared file and later request it from the web server by simply typing in his browser the URL to the uploaded  file, example: http://victim.com/uploads/myexploit.php .
+<br/>
+<br/>
+Basically the attacker uploads an script providing a file manager or shell-like interface which will allow him to execute commands in the security context of your web application. 
+Depending on the capabilities of the web server, he could upload an ASP or PHP script, coded his own or find one in milw0rm.com. If  he could get the server to execute a  .cgi, .exe or .dll file the possibilities are broader.
+<br/>
+<br/>
+Usually it will give the attacker enough to at least browse and read any files within your own application's reach. As a bonus he could also obtain write/delete privileges and things could get nastier. He could simply substitute your homepage with a "Here waz 3lite haxor!" and list your site in zone-h.org or worst he could start serving spy-ware and/or mount another attack from your web server.
+<br/>
+<br/>
+<b>How to prevent it?</b>
+<br/>
+<br/>
+There are several specific solutions to this, depending on platform, web server, technology combination. I will describe a general approach:
+<br/>
+<br/>
+For performance reasons you may want to rely on the web server capabilities to serve static content like images and documents. In this case we would expose the uploads folder through the web server either by placing the folder under the root of the web site or creating a virtual directory pointing to the folder.  If the files are served directly by the server we then must make sure these files are never executed or invoked by the server as it would be the case if the file had a .ASP or .PHP extensions. The following measures should be taken towards avoiding hosting or executing a maliciously injected script.
+<br/>
+<br/>
+<ul>
+<li>Require authentication to access the files. </li>
+<li>Check the file extension against a list of allowed extensions and not allowed extensions. </li>
+<li>Make sure your own scripts extension is included in the not allowed extensions list.</li>
+<li>Save the file with a random generated  name and track it in a database.</li>
+<li>Web Server: Disable Script Execution and Directory Browsing in the uploads (virtual) directory.</li>
+<li>File System: Remove Modify/Delete from any ACLs under your web folder.</li>
+<li>File System: Remove Execution from any ACLs in the upload folder. Really you shouldn't need Execution anywhere on the web content unless you were using CGIs.</li>
+<li>Anti Virus:  It is wise to have an anti-virus monitoring your upload folder.</li>
+<li>Visual Inspection: Check whats in the upload folder once in a while. I'm sure that naively named file filemanager.php will call your attention.</li>
+</ul> 
