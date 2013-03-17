@@ -3,6 +3,12 @@ mt_id: 15
 layout: post
 title: Finding figures of constant width on a chessboard
 date: 2009-04-27 15:23:12 -04:00
+tags:
+- combinatorics
+- fsharp
+- mathematics
+- n-queens
+- programming
 ---
 
 <div style="margin: 0pt 0pt 20px 20px; float: right;" ><img alt="cwfigure-sample-11-11-3.GIF" src="http://ademar.name/blog/cwfigure-sample-11-11-3a.GIF" height="275" width="276" /> <br/> <center>Constant width figure of type (11,11,3)</center></div>

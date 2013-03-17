@@ -3,6 +3,9 @@ mt_id: 2
 layout: post
 title: A simple .NET interface to dnscmd.exe
 date: 2005-06-30 23:49:52 -04:00
+tags:
+- csharp
+- dns
 ---
 Example of usage: 
 

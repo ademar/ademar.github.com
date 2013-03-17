@@ -3,6 +3,12 @@ mt_id: 29
 layout: post
 title: Intermittent PHP include failures on Microsoft IIS
 date: 2012-08-28 09:40:01 -04:00
+tags:
+- fastcgi
+- iis
+- iis7
+- php
+- wordpress
 ---
 This is an answer to my own [StackOverflow question](http://superuser.com/questions/285869/php-include-and-require-statements-fails-after-a-number-of-executions) that I can not answer over there because of lacking enough reputation.
 

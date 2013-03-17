@@ -3,6 +3,13 @@ mt_id: 17
 layout: post
 title: L-Systems and the Fibonacci word fractal
 date: 2009-07-09 18:13:04 -04:00
+tags:
+- fibonacci
+- fractal
+- fsharp
+- l-systems
+- mathematics
+- programming
 ---
 Check out <a href="http://hal.archives-ouvertes.fr/docs/00/36/79/72/PDF/The_Fibonacci_word_fractal.pdf">this article</a> for a lot of interesting properties of this fractal and its relation to the Fibonacci sequence. F# code follows after the image.
 

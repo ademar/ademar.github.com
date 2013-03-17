@@ -3,6 +3,13 @@ mt_id: 27
 layout: post
 title: Combinators for logic programming
 date: 2011-06-09 11:01:52 -04:00
+tags:
+- combinators
+- fsharp
+- logic
+- mathematics
+- programming
+- prolog
 ---
 Digging in my hard drive found this piece of code from my functional programming studies that implements
 the logic unification algorithm described in the article 'Combinators for logic programming' by Michael Spivey and Silvija Seres.

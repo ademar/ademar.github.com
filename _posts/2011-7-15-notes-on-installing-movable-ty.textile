@@ -3,6 +3,12 @@ mt_id: 28
 layout: post
 title: Notes on installing Movable Type version 5.11 on Microsoft Internet Information Services (IIS)
 date: 2011-07-15 11:29:24 -04:00
+tags:
+- cgi
+- iis
+- iis7
+- movabletype
+- perl
 ---
 Recently migrated my blog to a new server Windows Server 2008 R2 (also changed the painting) and had to re-install Movable Type. Whenever I have done this I usually hit the following two issues:
 

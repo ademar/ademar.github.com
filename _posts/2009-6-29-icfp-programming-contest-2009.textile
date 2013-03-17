@@ -3,6 +3,11 @@ mt_id: 16
 layout: post
 title: ICFP Programming Contest 2009
 date: 2009-06-29 15:49:58 -04:00
+tags:
+- contest
+- fsharp
+- icfp
+- programming
 ---
 I gave it a try at this year's contest (<a href="http://icfpcontest.org/">http://icfpcontest.org/</a>) and although it was a failed attempt it was a very interesting problem.
 

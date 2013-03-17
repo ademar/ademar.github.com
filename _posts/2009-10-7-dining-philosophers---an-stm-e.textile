@@ -3,6 +3,11 @@ mt_id: 18
 layout: post
 title: Dining philosophers - An STM example in F#
 date: 2009-10-07 17:52:54 -04:00
+tags:
+- concurrency
+- fsharp
+- programming
+- stm
 ---
 The <a href="http://en.wikipedia.org/wiki/Dining_philosophers_problem">dining philosophers problem</a> is a well known problem that illustrate the complexities of managing shared state in a concurrent scenario. The following is a sample solution utilizing <a href="http://cs.hubfs.net/blogs/hell_is_other_languages/archive/2008/01/16/4565.aspx">Gregory Neverov</a>'s implementation of Shared Transactional Memory for F#.
 

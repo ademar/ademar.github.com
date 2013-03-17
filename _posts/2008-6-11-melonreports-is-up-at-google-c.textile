@@ -3,6 +3,11 @@ mt_id: 9
 layout: post
 title: Melon-reports is up at Google Code.
 date: 2008-06-11 11:17:00 -04:00
+tags:
+- csharp
+- pdf
+- printing
+- reporting
 ---
 It is a library providing basic reporting and PDF printing. The following test methods illustrate its usage.
 

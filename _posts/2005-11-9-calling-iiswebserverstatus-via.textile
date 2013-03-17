@@ -3,6 +3,10 @@ mt_id: 3
 layout: post
 title: Calling IIsWebServer.Status via ADSI and C#
 date: 2005-11-09 01:26:25 -05:00
+tags:
+- adsi
+- csharp
+- iis
 ---
 The <a href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/iissdk/html/1103907a-56ab-4b8d-84b6-5a73bd8532ef.asp">IIS ADSI Provider reference</a> (incorrectly) states that IIsWebServer.Status is a method call, but the following code snippet fails with HRESULT 0x80020003.
 

@@ -3,6 +3,12 @@ mt_id: 26
 layout: post
 title: Typed SQL access, second take
 date: 2010-10-29 10:28:22 -04:00
+tags:
+- database
+- fsharp
+- sql
+- typed
+- workflow
 ---
  It gets better. Using this <a href="http://bugsquash.blogspot.com/2010/07/abusing-printfformat-in-f.html">nifty trick</a> from Mauricio Scheffer we can enhance our previous <a href="http://ademar.name/blog/2010/10/a-recipe-for-typed-sql-databas.html">SQL computations</a> with typed parameters and protect our code against SQL injections.
 

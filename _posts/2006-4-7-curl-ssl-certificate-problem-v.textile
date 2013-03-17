@@ -3,6 +3,14 @@ mt_id: 6
 layout: post
 title: "Curl: SSL certificate problem, verify that the CA cert is OK"
 date: 2006-04-07 11:24:34 -04:00
+tags:
+- certificates
+- curl
+- error
+- man-in-the-middle
+- php
+- security
+- ssl
 ---
 When opening a secure url with Curl you may get the following error:
 

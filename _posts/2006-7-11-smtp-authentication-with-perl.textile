@@ -3,6 +3,10 @@ mt_id: 5
 layout: post
 title: SMTP authentication with Perl
 date: 2006-07-11 10:44:58 -04:00
+tags:
+- authentication
+- perl
+- smtp
 ---
 bc[perl].. 
 #!/usr/local/bin/perl -w

@@ -3,6 +3,10 @@ mt_id: 13
 layout: post
 title: Parsing CSS style-like attributes with XSLT
 date: 2009-01-03 10:31:38 -05:00
+tags:
+- css
+- xml
+- xslt
 ---
 p.. Lets say we need to transform @<div style="width:236px; height:33px" />@ into @<element width="236" height="33" />@
 

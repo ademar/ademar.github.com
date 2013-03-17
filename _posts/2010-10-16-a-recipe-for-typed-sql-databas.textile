@@ -3,6 +3,12 @@ mt_id: 25
 layout: post
 title: A recipe for typed SQL database access.
 date: 2010-10-16 10:29:38 -04:00
+tags:
+- database
+- fsharp
+- monad
+- sql
+- workflow
 ---
  This is a rehash of ideas I've <a href="http://www.deanchalk.me.uk/post/Lightweight-e28098OR-Mappinge28099-in-F-Interactive.aspx">seen</a> <a href="http://cs.hubfs.net/forums/thread/11156.aspx">around</a>. Here we introduce a workflow encoding typed SQL queries computations. Consider the following code snippet.
 
