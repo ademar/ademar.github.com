@@ -13,6 +13,8 @@
   		{% include JB/sharing-providers/hn %}
 	{% when "all" %}
   		{% include JB/sharing-providers/global %}
+        {% when "custom" %}
+  		{% include JB/sharing-providers/custom %}
   {% endcase %}
 
 {% endif %}

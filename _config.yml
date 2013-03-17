@@ -118,13 +118,13 @@ JB :
   # Set 'provider' to false to turn sharing off globally.
   #
   sharing :
-    provider : tweet + plusone
+    provider : custom
     twitter :
       size :
       via :
       count :
     facebook :
-      appid : 205602882797935
+      appid : 
       layout : button_count
       font :
       faces : false
