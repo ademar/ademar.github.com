@@ -1,0 +1,325 @@
+/*
+ * User: ademar
+ * Date: 05/07/2005
+ * Time: 2:00 PM
+ * 
+ */
+
+using System;
+using System.Diagnostics;
+
+namespace DnsCmdWrapper
+{
+	public class DnsCmd
+	{
+		private const string DNS_CMD = "dnscmd" ;
+
+		public static bool DEBUG = false ;
+		
+		public string serverName  =  "." ;
+		public int ttl = 172800;
+
+		public DnsCmd(string serverName)
+		{
+			this.serverName = serverName ;
+		}
+
+		public bool ZoneExists(string zone)
+		{
+			if (DEBUG) return true;
+
+			Process dnsCmd = GetDnsProcess();
+
+			dnsCmd.StartInfo.Arguments = serverName + "/ZoneInfo " + zone ;
+			dnsCmd.Start();
+
+			string output = dnsCmd.StandardOutput.ReadToEnd();
+
+			dnsCmd.WaitForExit();
+			
+			return !(output.IndexOf("DNS_ERROR_ZONE_DOES_NOT_EXIST")>-1);
+		}
+
+		public void CreatePrimaryZone(string zone)
+		{
+			Execute(" /ZoneAdd " + zone + " /Primary /file " + zone + ".dns");
+		}
+
+		public void CreateSecondaryZone(string zone, string masterIpAddress)
+		{
+			if (masterIpAddress==null || masterIpAddress.Length==0)
+				throw new ApplicationException("masterIpAddress can NOT be null.");
+
+			Execute(" /ZoneAdd " + zone + " /Secondary " + masterIpAddress);
+		}
+
+		public void DeleteZone(string zone)
+		{
+			Execute(" /ZoneDelete " + zone + " /f");
+		}
+
+		public void CreateRecord(string zone, RRecord record)
+		{
+			string argument = null ;
+
+			switch(record.recordType)
+			{
+				case RecordTypes.A  :
+					ARecord a = (ARecord)record ;
+					argument = String.Format(" /RecordAdd {0} {1} {2} A {3}",zone,a.NodeName ,ttl.ToString(),a.IpAddress);
+					break;
+				case RecordTypes.NS :
+					NSRecord ns = (NSRecord)record ;
+					argument = String.Format(" /RecordAdd {0}  {1} {2} NS {3}",zone,ns.NodeName,ttl.ToString(),ns.HostName);
+					break;
+				case RecordTypes.MX :
+					MXRecord mx = (MXRecord)record ;
+					argument = String.Format(" /RecordAdd {0}  {1} {2} MX {3} {4}",zone,mx.NodeName,ttl.ToString(),mx.Preference,mx.ServerName);
+					break;
+				case RecordTypes.SOA :
+					SOARecord soa = (SOARecord)record ;
+					argument = String.Format(" /RecordAdd {0} {1} {2} SOA {3} {4} {5} {6} {7} {8} {9}",
+						zone,soa.NodeName,ttl,soa.PrimaryServer,soa.AdminEmail,soa.Serial,soa.Refresh,soa.Retry,soa.Expire,soa.MinTtl);
+					break;
+			}
+
+			if (argument!=null)
+			{
+				Execute(argument);
+			}
+
+		}
+
+		public void DeleteRecord(string zone, RRecord record)
+		{
+			string argument = null ;
+
+			switch(record.recordType)
+			{
+				case RecordTypes.A  :
+					ARecord a = (ARecord)record ;
+					argument = String.Format(" /RecordDelete {0} {1} {2} A {3} /f",zone,a.NodeName ,ttl.ToString(),a.IpAddress);
+					break;
+				case RecordTypes.NS :
+					NSRecord ns = (NSRecord)record ;
+					argument = String.Format(" /RecordDelete {0}  {1} {2} NS {3} /f",zone,ns.NodeName,ttl.ToString(),ns.HostName);
+					break;
+				case RecordTypes.MX :
+					MXRecord mx = (MXRecord)record ;
+					argument = String.Format(" /RecordDelete {0}  {1} {2} MX {3} {4} /f",zone,mx.NodeName,ttl.ToString(),mx.Preference,mx.ServerName);
+					break;		
+			}
+
+			if (argument!=null)
+			{
+				Execute(argument);
+			}
+			
+		}
+
+		/// <summary>
+		///	Resets the IP addresses for secondary DNS Servers in the zone.
+		/// </summary>
+		/// <param name="zone">domain name</param>
+		/// <param name="secondaryIPAddress">List of ip addesses separated by space</param>
+		public void ResetSecondaries(string zone, string secondaryIPAddress)
+		{
+			Execute(" /ZoneResetSecondaries " + zone + " /SecureList " + secondaryIPAddress);
+		}
+
+		private void Execute(string argument)
+		{
+			if (DEBUG)
+			{
+				Console.WriteLine(DNS_CMD + " " + serverName + argument);
+			}
+			else
+			{
+				Process dnsCmd = GetDnsProcess();
+
+				dnsCmd.StartInfo.Arguments = serverName + argument;
+				dnsCmd.Start();
+
+				dnsCmd.WaitForExit();
+			}
+		}
+
+		private Process GetDnsProcess()
+		{
+			Process proc = new Process();
+
+			proc.EnableRaisingEvents = false;
+
+			proc.StartInfo.CreateNoWindow  = true;
+			proc.StartInfo.UseShellExecute = false;
+			proc.StartInfo.RedirectStandardOutput = true ;
+
+			proc.StartInfo.FileName = DNS_CMD;
+
+			return proc ;
+		}
+
+/*
+		private string ZoneTypeToString(ZoneTypes zoneType)
+		{
+			switch(zoneType)
+			{
+				case ZoneTypes.Primary  : return "Primary" ;
+				case ZoneTypes.Secondary: return "Secondary";
+			}
+			return string.Empty ;
+		}
+*/
+
+	}
+
+	public enum ZoneTypes {Primary,Secondary};
+	public enum RecordTypes {A,MX,NS,SOA};
+
+	public abstract class RRecord
+	{
+		public RecordTypes recordType ;
+
+		public RRecord(RecordTypes recordType)
+		{
+			this.recordType = recordType ;
+		}
+	}
+
+	public class ARecord: RRecord
+	{
+		public string NodeName
+		{
+			get { return nodeName; }
+		}
+
+		public string IpAddress
+		{
+			get { return ipAddress; }
+		}
+
+		string nodeName,ipAddress ;
+
+		public ARecord(string nodeName,string ipAddress):base(RecordTypes.A)
+		{
+			this.nodeName = nodeName;
+			this.ipAddress = ipAddress;
+		}
+	}
+
+	public class NSRecord: RRecord
+	{
+		public string HostName
+		{
+			get { return hostName; }
+		}
+
+		string hostName;
+
+		public string NodeName
+		{
+			get { return nodeName; }
+		}
+
+		string nodeName;
+
+		public NSRecord(string nodeName,string hostName):base(RecordTypes.NS)
+		{
+			this.nodeName = nodeName;
+			this.hostName = hostName;
+		}
+	}
+
+	public class MXRecord: RRecord
+	{
+		public string NodeName
+		{
+			get { return nodeName; }
+		}
+
+		public int Preference
+		{
+			get { return preference; }
+		}
+
+		public string ServerName
+		{
+			get { return serverName; }
+		}
+
+		string nodeName ;
+		int preference ;
+		string serverName ;
+
+		public MXRecord(string nodeName,int preference,string serverName):base(RecordTypes.MX)
+		{
+			this.nodeName   = nodeName ;
+			this.preference = preference ;
+			this.serverName = serverName ;
+		}
+	}
+
+	public class SOARecord: RRecord
+	{
+		public string NodeName
+		{
+			get { return nodeName; }
+		}
+
+		public string PrimaryServer
+		{
+			get { return primaryServer; }
+		}
+
+		public string AdminEmail
+		{
+			get { return adminEmail; }
+		}
+
+		public int Refresh
+		{
+			get { return refresh; }
+		}
+
+		public int Retry
+		{
+			get { return retry; }
+		}
+
+		public int Expire
+		{
+			get { return expire; }
+		}
+
+		public int MinTtl
+		{
+			get { return minTTL; }
+		}
+
+		string nodeName;
+		string primaryServer;
+		string adminEmail;
+		int refresh;
+		int retry;
+		int expire;
+		int minTTL;
+		private string serial;
+
+		public SOARecord(string nodeName,string primaryServer,string serial,string adminEmail,int refresh,int retry, int expire, int minTTL):base(RecordTypes.SOA)
+		{
+			this.nodeName = nodeName ;
+			this.primaryServer = primaryServer ;
+			this.adminEmail = adminEmail ;
+			this.refresh = refresh ;
+			this.retry = retry ;
+			this.expire = expire ;
+			this.minTTL = minTTL ;
+			this.serial = serial ;
+		}
+
+		public string Serial
+		{
+			get { return serial; }
+		}
+	}
+}
