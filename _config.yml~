@@ -118,7 +118,10 @@ JB :
   # Set 'provider' to false to turn sharing off globally.
   #
   sharing :
-    provider : tweet + plusone
+<<<<<<< HEAD
+    provider : tweet
+=======
+    provider : all
     twitter :
       size :
       via :
@@ -135,6 +138,7 @@ JB :
       annotation : bubble
     linkedin :
       counter : right
+>>>>>>> a527018... 	modified:   _config.yml
     
   # Settings for all other include helpers can be defined by creating 
   # a hash with key named for the given helper. ex:
