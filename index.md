@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Blog Posts
+title: ademar@toronto
 ---
 {% include JB/setup %}
 
