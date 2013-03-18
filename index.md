@@ -1,8 +1,9 @@
 ---
 layout: page
-title: ademar@toronto
+title: Solving the riddle
 ---
 {% include JB/setup %}
+## Blog Posts
 
 <ul class="posts">
   {% for post in site.posts %}
