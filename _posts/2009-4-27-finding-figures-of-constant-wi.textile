@@ -15,7 +15,7 @@ tags:
 
 p.. We will say a collection of squares on an nxn board is a figure of _constant width w_ if every row, column and diagonal (both main diagonals) intersects the collection in exactly w squares or does not intersects it at all. Such a figure will contain exactly k*w  squares and we will say it is of type @(n,k,w)@. Note that the figures of type @(n,n,1)@ are the solutions to the n-queens problem.
 
-Finding figures of constant width with the computer is an interesting problem. This problem was first described <a href="http://www.math.yorku.ca/~lrobert/cw-figures/figures.html">here</a>.
+Finding figures of constant width with the computer is an interesting problem. This problem was first described <a href="http://www.ucs.louisiana.edu/~lxr7423/cwfiguresweb/cwfigures.html">here</a>.
 
 The following is a backtracking algorithm that enumerates all connected figures of type @(n,_,w)@.  
 
