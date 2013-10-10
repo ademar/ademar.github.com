@@ -20,10 +20,13 @@ I will explain why the error and what you should do about it.
 
 The easiest way of getting rid of the error would be adding the following two lines to your script . This solution poses a security risk tho.
 
-bc[PHP].. 
+<pre>
+<code>
 //WARNING: this would prevent curl from detecting a 'man in the middle' attack
 curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);
 curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, 0); 
+</code>
+</pre>
 
 p.. 
 Let see what this two parameters do. Quoting the manual.<br/>
@@ -46,9 +49,12 @@ If the remote resource is protected by a certificate issued by one of the main C
 
 Save the file cacert.pem somewhere in your server and set the following options in your script.
 
-bc[PHP].. 
+<pre>
+<code> 
 curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, TRUE); 
 curl_setopt ($ch, CURLOPT_CAINFO, "pathto/cacert.pem");
+</code>
+</pre>
 
 p.. 
 If you are connecting to a resource protected by a self-signed certificate, all you need to do is obtain a copy of the certificate in PEM format and append it to the cacert.pem of the above paragraph.
