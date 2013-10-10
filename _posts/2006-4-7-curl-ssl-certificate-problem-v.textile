@@ -59,4 +59,4 @@ curl_setopt ($ch, CURLOPT_CAINFO, "pathto/cacert.pem");
 p.. 
 If you are connecting to a resource protected by a self-signed certificate, all you need to do is obtain a copy of the certificate in PEM format and append it to the cacert.pem of the above paragraph.
 
-By now you should be pretty safe from the man in the middle. But there is still a weak point here, there is nothing that says the trust chain can't been subverted. In fact it have happened before : <a href="http://news.com.com/2100-1001-254586.html">http://news.com.com/2100-1001-254586.html</a> 
+By now you should be pretty safe from the man in the middle. But there is still a weak point here, there is nothing that says the trust chain can't been subverted. In fact it have happened before : <a href="http://news.cnet.com/2100-1001-254586.html">http://news.cnet.com/2100-1001-254586.html</a> 
