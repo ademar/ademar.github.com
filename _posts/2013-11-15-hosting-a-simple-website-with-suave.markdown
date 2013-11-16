@@ -1,0 +1,49 @@
+--- 
+layout: post
+title: Hosting a static website with Suave
+tags:
+- suave
+- web
+- fsharp
+- async
+- server
+- mono
+- linux
+---
+What follows is the code for the webserver running at [Suave.IO](http://suave.io)
+
+{% highlight fsharp %}
+#light(*
+exec fsharpi --exec $0 --quiet
+*)
+
+#r "suave.dll"
+
+open Suave.Types
+open Suave.Web
+open Suave.Http
+open System
+open System.Net
+
+let app : WebPart = 
+    choose [
+       Console.OpenStandardOutput() |> log >>= never;
+       url_regex "(.*?)\.(fsx|dll|mdb|log)$" >>= FORBIDDEN "Access denied.";
+       GET >>= choose [ url "/" >>= file "index.html"; browse ];
+       NOT_FOUND "Found no handlers." 
+    ]
+
+let config = 
+    { default_config with
+       bindings = [ { scheme = HTTP ; ip = IPAddress.Parse "10.0.0.5" ; port   = 80us } ]
+       timeout = TimeSpan.FromMilliseconds 3000.
+    }
+
+web_server config app
+{% endhighlight %}
+
+On Linux I lauch the script with something like this
+
+```
+nohup fsharpi WebApp.fsx > web.log &
+```
