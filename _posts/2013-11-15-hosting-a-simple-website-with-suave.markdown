@@ -48,7 +48,7 @@ On Linux I lauch the script with something like this
 nohup fsharpi WebApp.fsx > web.log &
 ```
 
-I ran a load test against Suave.IO with [Load Impact](http://loadimpact.com); this is the resulting graph
+I ran a load test against Suave.IO with [Load Impact](http://loadimpact.com); this is the resulting graph. Note how the response time stays constant as the number of client connections increases.
 
 ![Load Impact Chart](https://pbs.twimg.com/media/BZM7IPvCYAEssAg.png:large)
 
