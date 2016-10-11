@@ -12,7 +12,7 @@ tags:
 ---
 What follows is the code for the webserver running at [Suave.IO](http://suave.io)
 
-{% highlight fsharp %}
+```fsharp 
 #light(*
 exec fsharpi --exec $0 --quiet
 *)
@@ -40,12 +40,15 @@ let config =
     }
 
 web_server config app
-{% endhighlight %}
+
+```
 
 On Linux I lauch the script with something like this
 
-```
+```text
+
 nohup fsharpi WebApp.fsx > web.log &
+
 ```
 
 I ran a load test against Suave.IO with [Load Impact](http://loadimpact.com); this is the resulting graph. Note how the response time stays constant as the number of client connections increases.
