@@ -10,7 +10,7 @@ tags:
 
 Calculates non-repeating k-combinations of a list.
 
-bc.. 
+```fsharp
 > let rec choices = function
   | []      -> []
   | p::tail -> (p,tail) :: [ for (y,l) in choices tail -> (y,l) ];;
@@ -44,3 +44,7 @@ val binomial : int -> int -> int
 
 > binomial 52 5;;
 val it : int = 2598960 
+
+```
+
+

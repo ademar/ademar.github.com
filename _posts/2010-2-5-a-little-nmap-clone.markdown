@@ -11,7 +11,7 @@ tags:
 ---
 This is an anemic clone of the famous hacker tool <a href="http://nmap.org/">nmap</a>. It takes advantage of F# asynchronous workflows to parallelize the network and port scanning. It is notable that without any low level TCP trickery this little program achieves performance comparable to the original nmap.
 
-bc.. 
+```fsharp
 open System
 open System.Net
 open System.Net.Sockets
@@ -141,10 +141,11 @@ match range_scanning_enabled, port_scanning_enabled with
 
 printf  "took %dms\n" timer.ElapsedMilliseconds;
 
-p.. 
+```
+
 For example to scan the network 10.0.1.1/24 including a port scan you would go like this:
 
-bc.. 
+```
 sh-3.2# mono discover.exe 10.0.1.1 24 -p
 10.0.1.1 is up
 port	53	is open
@@ -156,3 +157,7 @@ port	53	is open
 port	88	is open
 port	548	is open
 took 37742ms 
+
+```
+
+

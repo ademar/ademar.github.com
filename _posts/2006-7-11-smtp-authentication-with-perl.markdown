@@ -8,7 +8,9 @@ tags:
 - perl
 - smtp
 ---
-bc[perl].. 
+
+```perl 
+
 #!/usr/local/bin/perl -w
 use Net::SMTP;
 $recipient = 'somebody@somewhere.com' ;
@@ -30,7 +32,8 @@ $smtp->dataend();
 
 $smtp->quit;
 
-p. 
+``` 
+
 Something funny, while testing the above script, my Postfix server complained with the following message -
 
 <em>221 Error: I can break rules, too. Goodbye.</em> - i LOLed.

@@ -9,7 +9,8 @@ tags:
 - mutex
 - web
 ---
-bc[java].. 
+
+```chsarp
 private static Mutex mut = new Mutex();
 
 private MemoryStream GetImage(string s,int width,int height,ImageFormat f) {
@@ -55,3 +56,7 @@ private string GetCount(){
 
 	return count.ToString() ;	
 } 
+
+```
+
+

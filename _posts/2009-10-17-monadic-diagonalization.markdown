@@ -12,7 +12,7 @@ tags:
 ---
 Suppose we want to find all two factors decompositions of a positive integer. We could try the following naive solution.
 
-bc.. 
+```fsharp
 > let rec inf_seq n = seq { yield n; yield! inf_seq (n+1) };;
 
 val inf_seq : int -> seq<int>
@@ -28,20 +28,22 @@ val omega : seq<int>
 - Interrupt
 (1,24)
 
-p.. 
+``` 
+
 This goes on ad infinitum and prints only one solution after interrupting the evaluation on the F# console.The reason is the following, not all pairs are treated fairly equal. Notice the generated output on the following expression:
 
-bc.. 
+```fsharp
 > seq { for i in (inf_seq 1) do
                 for j in (inf_seq 1) do yield (i,j)};;
 val it : seq<int * int> = seq [(1, 1); (1, 2); (1, 3); (1, 4); ...]
 
-p.. 
+```
+
 The sequence only generates (1,x) pairs, because the first inner loop will never end iterating.
 
 To address this issue we need a mechanism where the pairs are generated in a fair order. This mechanism is known as <a href="http://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument">diagonalization</a> (because of Cantor's diagonalization proof). Our diagonalization process will take a lazy list of lazy lists and will rearrange its items following Cantor's method. The implementation of the function diagonal is given at the end of the post.
 
-bc.. 
+```fsharp
 > let x = diag (LazyList.of_list [omega;omega;omega]);;
 
 val x : LazyList<LazyList<int>>
@@ -50,10 +52,11 @@ val x : LazyList<LazyList<int>>
 val it : LazyList<LazyList<int>> =
   seq [seq [1]; seq [2; 1]; seq [3; 2; 1]; seq [4; 3; 2]; ...]
 
-p.. 
+```
+
 We can embed this process into a work-flow (monad)
 
-bc.. 
+```fsharp
 type DiagBuilder () = 
     member b.Return(x)  = LazyList.of_list [x]
     member b.Bind(x, rest) =  LazyList.concat (diag (LazyList.map rest x))
@@ -63,10 +66,11 @@ type DiagBuilder () =
 
 let diagonal = new DiagBuilder ()
 
-p.. 
+```
+ 
 Using the diagonal monad, our initial factorization problem can be solved like this
 
-bc.. 
+```fsharp 
 > let all_pairs = diagonal { 
     let! n = LazyList.of_seq(inf_seq 1)
     let! m = LazyList.of_seq(inf_seq 1)
@@ -82,12 +86,13 @@ val factors : seq<int * int>
 > factors;;
 val it : seq<int * int> = seq [(4, 6); (6, 4); (3, 8); (8, 3); ...]
 
-p.. 
+```
+
 There is some small caveat thought, our algorithm does not stop. Also notice that diagonal is not a real monad because our bind operator is not associative.
 
 Here is the function diagonal which completes the program.
 
-bc.. 
+```fsharp 
 let rec lzw f l1 l2 =
     LazyList.delayed ( fun () -> 
     match l1,l2 with
@@ -105,7 +110,8 @@ let rec diag input =
                 (LazyList.of_seq (seq {for x in p do yield LazyList.of_list [x]})) 
                 (LazyList.consf (LazyList.empty()) (fun () -> diag tail)))
 
-p.. 
+```
+ 
 <b>References</b>
 - Combinators for logic programming, Michael Spivey and Silvija Seres
 - Enumerating a context-free language, Luke Palmer

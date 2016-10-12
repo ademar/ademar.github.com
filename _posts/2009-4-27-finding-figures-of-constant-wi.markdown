@@ -42,7 +42,7 @@ The algorithm  assumes <em>f<sub>S</sub>(p)=(w,w,w,w)</em> for every p belonging
 Here is the link to the full F# program (<a href="http://ademar.name/blog/cwfigures.fs.txt" >cwfigures.fs</a>) and bellow is the function @find@ that performs the search strategy.
 <br/>
 
-bc.. 
+```fsharp
 let find len F availables buffer =
     let rec search sol len (avlen,avail) (bufflen,buff) =
         match buff with
@@ -63,7 +63,8 @@ let find len F availables buffer =
                             )) (bufflen - 1, tail)
     search [] len availables buffer;;      
 
-p..  
+```
+
 While there are other backtracking strategies, some of them more aesthetically appealing, this was the faster combination I could come up with. To generate all figures of type (11,_, 3) it took roughly 31 days on a Windows XP virtual machine hosted on Linux running on a quad-core. The same program running on the Linux host (with Mono 2.0.1) performed about twice slower. 
 
 There are 21 solutions of type (11,11,3) and 1 solution of type (11,10,3), module the symmetries of the square. You can see them <a href="http://ademar.name/blog/11-3-final.html">here</a> 

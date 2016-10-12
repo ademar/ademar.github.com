@@ -12,7 +12,8 @@ tags:
 ---
  It gets better. Using this <a href="http://bugsquash.blogspot.com/2010/07/abusing-printfformat-in-f.html">nifty trick</a> from Mauricio Scheffer we can enhance our previous <a href="http://ademar.name/blog/2010/10/a-recipe-for-typed-sql-databas.html">SQL computations</a> with typed parameters and protect our code against SQL injections.
 
-bc.. 
+```fsharp 
+
 open Suave.Data
 open System.Data.SQLite
 
@@ -59,3 +60,6 @@ match queries with
 tx.Query "delete from family" |> executeNonQuery
 
 System.Console.ReadLine() |> ignore 
+
+```
+

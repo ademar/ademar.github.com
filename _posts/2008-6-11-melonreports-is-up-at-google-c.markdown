@@ -13,7 +13,8 @@ It is a library providing basic reporting and PDF printing. The following test m
 
 Generating a PDF document.
 
-bc[java].. [Test]
+```csharp
+[Test]
 public void Works()
 {
 	var pdf = new PdfDocument();
@@ -38,11 +39,13 @@ public void Works()
 			
 }
 
-p.. 
+```
+
 Loading and generating a report.
 <br/>
 
-bc[java].. 
+```csharp
+
 private Report report;
 private Document document;
 
@@ -78,7 +81,7 @@ public void Print()
 	f.Close();
 }
 
-p. 
+```
 
 <br/>
 

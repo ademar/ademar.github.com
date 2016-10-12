@@ -18,7 +18,7 @@ Here are some samples of what kind of problems it can solve.
 
 <b>Sample #1 - append</b>
 
-bc.. 
+```fsharp
 let X = var "x"
 let Y = var "y"
 
@@ -26,7 +26,8 @@ let problem1 = append X Y (list [1;2;3;4;5])
 
 run problem1 |> printSolutions
 
-p.. 
+```
+
 returns:
 <pre>{x=Nil,y=[1, 2, 3, 4, 5]}
 {x=[1],y=[2, 3, 4, 5]}
@@ -37,7 +38,7 @@ returns:
 </pre>
 <b>Sample #2 - good sequence</b>
 
-bc.. 
+```fsharp
 let rec good s = 
     step( (s == cons (Int 0) Nil) 
             ||| exists (fun t -> 
@@ -49,7 +50,8 @@ let problem2 = good  (var "s")
 
 run problem2 |> printSolutions
 
-p.. 
+```
+
 returns:
 <pre>
 {s=[0]}
@@ -67,7 +69,7 @@ returns:
 
 <b>Sample #3 - Difference lists & Grammars</b>
 
-bc.. 
+```fsharp
 let append' (a1,a2) (b1,b2) (c1,c2) = 
     (a1 == c1) &&& (a2 == b1) &&& (b2 == c2) // -- difference list axiom
 
@@ -90,7 +92,8 @@ let sentence = noun_phrase ++ verb_phrase
 
 run ( sentence (var "q", Nil)) |> printSolutions
 
-p.. 
+```
+ 
 returns:
 <pre>
 {q=[the, cat, scares, the, cat]}

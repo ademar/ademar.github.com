@@ -9,7 +9,8 @@ tags:
 - parallel
 - tcp/ip
 ---
-bc.. 
+
+```fsharp
 open System.IO
 open System.Threading
 open System.Net
@@ -43,4 +44,7 @@ let tcp_ip_proxy (sourceip,sourceport) (targetip,targetport) =
 
 tcp_ip_proxy ("127.0.0.1",8080) ("66.249.81.104",80)
 
- 
+
+```
+
+

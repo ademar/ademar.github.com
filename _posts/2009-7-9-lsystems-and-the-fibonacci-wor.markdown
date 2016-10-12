@@ -16,7 +16,7 @@ Check out <a href="http://hal.archives-ouvertes.fr/docs/00/36/79/72/PDF/The_Fibo
 <center><div style="margin: 0pt 0pt 20px 20px;" ><img alt="fibonacci word fractal" src="http://ademar.name/blog/fibonacci_word.GIF"  /> <br/> <center>Fibonacci word fractal</center></div></center>
 <br/>
 
-bc.. 
+```fsharp
 open System
 open System.Drawing
 open System.Drawing.Imaging
@@ -84,4 +84,6 @@ let turtle = Turtle(Graphics.FromImage(bitmap))
 List.iter (interpreter turtle) (applyN (List.collect fibonacci_word) 8 [L(0.5)])
 
 bitmap.Save("fibonacci_word.bmp")
+
+```
  

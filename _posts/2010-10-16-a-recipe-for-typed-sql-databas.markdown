@@ -12,7 +12,7 @@ tags:
 ---
  This is a rehash of ideas I've <a href="http://www.deanchalk.me.uk/post/Lightweight-e28098OR-Mappinge28099-in-F-Interactive.aspx">seen</a> <a href="http://cs.hubfs.net/forums/thread/11156.aspx">around</a>. Here we introduce a workflow encoding typed SQL queries computations. Consider the following code snippet.
 
-bc.. 
+```fsharp
 open Suave.Data
 open System.Data.SQLite
 
@@ -43,8 +43,8 @@ match queries with
 |Some(first_name,last_name,age) -> printfn "%s, %s, %d" first_name last_name age
 |None -> printfn "query failed"
  
-
-p.. 
+```
+ 
  There are several advantages of using such approach. The workflow provides type safety since F# will infer the types for the binding values and hides all of the boilerplate code associated with querying SQL databases. Throught the let! bindings we provide success/failure semantics with its obvious benefits. 
 
 The <a href="http://github.com/ademar/suave/blob/master/Suave/Data.fs">code for the workflow is here</a> 

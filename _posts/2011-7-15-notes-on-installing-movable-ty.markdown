@@ -14,9 +14,10 @@ Recently migrated my blog to a new server Windows Server 2008 R2 (also changed t
 
 <b>First Issue:</b>
 
-bq. 
+```
 HTTP Error 502.2 - Bad Gateway
 The specified CGI application misbehaved by not returning a complete set of HTTP headers. The headers it did return are "Can't locate MT/Bootstrap.pm in @INC (@INC contains: lib D:/Perl/site/lib D:/Perl/lib .) at \\nas-005\winspace\10-ademar.name\www\mt\mt.cgi line 11. BEGIN failed--compilation aborted at \\nas-005\winspace\10-ademar.name\www\mt\mt.cgi line 11. ".
+```
 
 <div style="margin: 0pt 0pt 20px 20px; float: right;" ><img alt="movabletypedirectorylayout.png" src="http://ademar.name/blog/movabletypedirectorylayout.png" /> <br/> <center>Movable Type directory layout</center></div>
 
@@ -32,13 +33,16 @@ Plugin error: \\nas-005\winspace\10-ademar.name\www\mt\plugins\Markdown\SmartyPa
 
 p.  To solve this I modified MT.pm by substituting lines 1396,1397 (as of version 5.11)
 
-bc. 
+```php
 eval "# line " . __LINE__ . " " . __FILE__
         . "\nrequire '$plugin';";
 
-p. by the following:
+```
+by the following:
 
-bc. 
+```php
 eval { require $plugin };
+
+```
 
 p. I'm not sure how wise is that change but it solves the problem. 

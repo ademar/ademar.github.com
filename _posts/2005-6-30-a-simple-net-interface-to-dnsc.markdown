@@ -9,7 +9,8 @@ tags:
 ---
 Example of usage: 
 
-bc[java].. 
+```csharp 
+
 DnsCmd dnsCmd = new DnsCmd("my.dns.server");
 
 dnsCmd.CreatePrimaryZone("zone.ademar.name");
@@ -23,5 +24,6 @@ dnsCmd.CreateRecord("zone.ademar.name",
 MXRecord mx = new MXRecord("@",10,"ma.isqsolutions.com.");
 dnsCmd.CreateRecord("zone.ademar.name",mx);
 
-p. 
+``` 
+
 Here is the link to the class implementation : <a href="http://ademar.name/blog/DnsCmd.cs.txt">DnsCmd.cs</a> 
