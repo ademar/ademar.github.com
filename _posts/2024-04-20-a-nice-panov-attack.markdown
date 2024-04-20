@@ -7,4 +7,4 @@ tags:
 ---
 ![game][1]
 
-[1]: blog/panov-attack.gif
+[1]: /blog/panov-attack.gif
