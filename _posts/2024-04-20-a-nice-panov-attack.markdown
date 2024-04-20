@@ -1,7 +1,7 @@
 --- 
 layout: post
 title: A nice Panov attack
-date: 2005-11-09 01:26:25 -05:00
+date: 2024-04-20 01:26:25 -05:00
 tags:
 - chess
 ---
