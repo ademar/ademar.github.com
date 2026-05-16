@@ -1,4 +1,4 @@
-# Introducing TacticForge — Personalized Chess Training Built From Your Own Games
+# Personalized Chess Training Built From Your Own Games
 
 I've been working on a side project I'm finally ready to share: **TacticForge** [tacticforge.fun](https://tacticforge.fun), a chess training platform that turns your real games into a personalized tactics curriculum.
 
