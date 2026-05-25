@@ -1,4 +1,3 @@
-```markdown
 ---
 title: "Suave now speaks HTTP/2"
 date: 2026-05-25
