@@ -4,8 +4,6 @@ date: 2026-05-25
 tags: [fsharp, suave, http2, dotnet]
 ---
 
-# Suave now speaks HTTP/2
-
 I just shipped HTTP/2 support in [Suave](https://github.com/SuaveIO/suave),
 the lightweight F# web server. It is in-tree (no proxy, no Kestrel in front)
 and turned on by default: every Suave application built against the new
