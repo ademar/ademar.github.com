@@ -2,73 +2,72 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{{ page.title }}</title>
+    <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
     {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
     <meta name="author" content="{{ site.author.name }}">
-
-    <!-- Enable responsive viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0e334d">
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="og:title" content="{{ page.title }}">
+    <meta property="og:image" content="https://ademar.name/assets/themes/twitter/images/toronto.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@{{ site.author.twitter }}">
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css" rel="stylesheet">
+    <link href="/stylesheets/pygments.css" rel="stylesheet">
 
-    <!-- Le styles -->
-    <link href="/assets/themes/twitter/bootstrap/css/bootstrap.2.2.2.min.css" rel="stylesheet">
-    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
-
-    <!-- Le fav and touch icons -->
-  <!-- Update these with your own images
-    <link rel="shortcut icon" href="images/favicon.ico">
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
-  -->
-
-    <!-- atom & rss feed -->
     <link href="{{ BASE_PATH }}{{ site.JB.atom_path }}" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
     <link href="{{ BASE_PATH }}{{ site.JB.rss_path }}" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
-
   </head>
 
-  <body>
-    <div class="navbar" style="background-image:url('{{ASSET_PATH}}/images/toronto.jpg');background-repeat:no-repeat;display: compact;background-position:center top;background-size:1023px 212px;height: 212px">
-      <div class="navbar-inner">
-        <div class="container-narrow">
-          <a class="brand" href="{{ HOME_PATH }}">{{ site.title }}</a>
-          <ul class="nav">
-            {% assign pages_list = site.pages %}
-            {% assign group = 'navigation' %}
-            {% include JB/pages_list %}
-          </ul>
+  <body{% if page.url == '/index.html' or page.url == '/' %} class="home"{% endif %}>
+    <a class="skip-link" href="#content">Skip to content</a>
+
+    <header class="site-header">
+      <div class="site-header__bar">
+        <div class="wrap site-header__inner">
+          <div class="site-brand">
+            {% if page.url == '/index.html' or page.url == '/' %}
+              <h1 class="site-title"><a href="{{ HOME_PATH }}">ademar<span class="site-title__at">@</span>toronto</a></h1>
+            {% else %}
+              <a class="site-title" href="{{ HOME_PATH }}">ademar<span class="site-title__at">@</span>toronto</a>
+            {% endif %}
+            <p class="site-tagline">{{ site.tagline }}</p>
+          </div>
+          <nav class="site-nav" aria-label="Primary">
+            <ul>
+              {% assign pages_list = site.pages %}
+              {% assign group = 'navigation' %}
+              {% include JB/pages_list %}
+            </ul>
+          </nav>
         </div>
       </div>
-    </div>
+    </header>
 
-    <div class="container-narrow">
+    <main id="content" class="wrap">
+      {{ content }}
+    </main>
 
-      <div class="content">
-        {{ content }}
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="about">
+          <h2>About</h2>
+          <ul>
+            <li class="contact">
+              <span class="author fn">{{ site.author.name }}</span>
+              <a class="fn email" href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>
+            </li>
+            <li class="github"><a href="https://github.com/{{ site.author.github }}/" rel="me">github.com/{{ site.author.github }}</a></li>
+            <li class="twitter"><a href="https://twitter.com/{{ site.author.twitter }}/" rel="me">twitter.com/{{ site.author.twitter }}</a></li>
+          </ul>
+        </div>
+        <p class="copyright">&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}</p>
       </div>
-      <hr>
-      <div class="content">
-	<h2>about</h2>
-	<ul>
-		<li class="contact"><address><span class="author fn">{{ site.author.name }}</span> - <span class="fn email">{{ site.author.email }}</span></address></li>
-		<li class="github"><a href="http://github.com/{{ site.author.github }}/" rel="me">github.com/{{ site.author.github }}</a></li>
-		<li class="twitter"><a href="http://twitter.com/{{ site.author.twitter }}/" rel="me">twitter.com/{{ site.author.twitter }}</a></li>
-	</ul>
-      </div>
-      <hr>
-      <footer>
-        <p>&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}
-          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
-          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
-        </p>
-      </footer>
-
-    </div>
+    </footer>
 
     {% include JB/analytics %}
   </body>

@@ -1,54 +1,44 @@
-<div class="page-header">
-  <h1>{{ page.title }} {% if page.tagline %}<small>{{page.tagline}}</small>{% endif %}</h1>
-</div>
+<article class="post-full">
+  <header class="page-header">
+    <h1>{{ page.title }}{% if page.tagline %} <small>{{ page.tagline }}</small>{% endif %}</h1>
+    <time class="date" datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d %B %Y" }}</time>
+  </header>
 
-<div class="row-fluid post-full">
-  <div class="span12">
-    <div class="date">
-      <span>{{ page.date | date_to_long_string }}</strong>
-    </div>
-    <div class="content">
-      {{ content }}
-    </div>
+  <div class="content">
+    {{ content }}
+  </div>
 
   {% unless page.categories == empty %}
     <ul class="tag_box inline">
-      <li><i class="icon-folder-open"></i></li>
       {% assign categories_list = page.categories %}
       {% include JB/categories_list %}
     </ul>
-  {% endunless %}  
+  {% endunless %}
 
   {% unless page.tags == empty %}
     <ul class="tag_box inline">
-      <li><i class="icon-tags"></i></li>
       {% assign tags_list = page.tags %}
       {% include JB/tags_list %}
     </ul>
-  {% endunless %}  
+  {% endunless %}
 
-    <hr>
-    <div class="pagination">
-      <ul>
-      {% if page.previous %}
-        <li class="prev"><a href="{{ BASE_PATH }}{{ page.previous.url }}" title="{{ page.previous.title }}">&larr; Previous</a></li>
-      {% else %}
-        <li class="prev disabled"><a>&larr; Previous</a></li>
-      {% endif %}
-        <li><a href="{{ BASE_PATH }}{{ site.JB.archive_path }}">Archive</a></li>
-      {% if page.next %}
-        <li class="next"><a href="{{ BASE_PATH }}{{ page.next.url }}" title="{{ page.next.title }}">Next &rarr;</a></li>
-      {% else %}
-        <li class="next disabled"><a>Next &rarr;</a>
-      {% endif %}
-      </ul>
-    </div>
-    <hr>
-    
-    <div class="post-sharing">
-      {% include JB/sharing %}
-    </div>
-    
-    {% include JB/comments %}
+  <nav class="pagination" aria-label="Post">
+    {% if page.previous %}
+      <a class="prev" href="{{ BASE_PATH }}{{ page.previous.url }}" title="{{ page.previous.title }}">&larr; {{ page.previous.title }}</a>
+    {% else %}
+      <span class="prev disabled">&larr; Previous</span>
+    {% endif %}
+    <a class="archive-link" href="{{ BASE_PATH }}{{ site.JB.archive_path }}">Archive</a>
+    {% if page.next %}
+      <a class="next" href="{{ BASE_PATH }}{{ page.next.url }}" title="{{ page.next.title }}">{{ page.next.title }} &rarr;</a>
+    {% else %}
+      <span class="next disabled">Next &rarr;</span>
+    {% endif %}
+  </nav>
+
+  <div class="post-sharing">
+    {% include JB/sharing %}
   </div>
-</div>
+
+  {% include JB/comments %}
+</article>
