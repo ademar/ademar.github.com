@@ -172,11 +172,17 @@ h1.site-title {
 .site-nav ul {
   display: flex;
   flex-wrap: wrap;
+  align-items: baseline;
   justify-content: flex-end;
   gap: 0.15rem 1.15rem;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.site-nav li,
+.site-nav li + li {
+  margin: 0;
 }
 
 .site-nav a {
@@ -282,7 +288,8 @@ ol {
   padding-left: 1.25rem;
 }
 
-li + li {
+.content li + li,
+.page-body li + li {
   margin-top: 0.25rem;
 }
 
