@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Tagua, and a report writer I started in 2008"
+title: "Tagua, and an old report writer of mine"
 date: 2026-09-30 10:00:00 -04:00
 tags:
 - tagua
